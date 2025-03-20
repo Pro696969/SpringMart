@@ -1,15 +1,13 @@
 package com.ooad6.ecommerce;
 
-
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class SignupController {
 
-    @RequestMapping("/Signup")
+    @RequestMapping("/signup")
     public String signup() {
         return "signup.jsp";
     }
-
 }
