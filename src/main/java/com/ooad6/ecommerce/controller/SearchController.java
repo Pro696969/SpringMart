@@ -16,6 +16,14 @@ public class SearchController {
 
     @GetMapping("/allitems")
     public List<Items> allItems() {
+        System.out.println("This is Allitems");
         return items.findAll();
     }
+
+    // Basically performing CRUD operations along with RequestParam will be recognized by swagger
+    //    @GetMapping("/testAPI")
+    //    public String testAPI() {
+    //        System.out.println("This is testAPI");
+    //        return "";
+    //    }
 }

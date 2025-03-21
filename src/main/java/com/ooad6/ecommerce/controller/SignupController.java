@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SignupController {
     @RequestMapping("signup")
     public String sign() {
+        System.out.println("This is Signup");
         return "signup.jsp";
     }
 }
