@@ -6,6 +6,6 @@
     <title>Sign Up Page</title>
 </head>
 <body>
-Hello WELCOME THANKS this is the home page
+Hello WELCOME THANKS this is the home page ${userid}
 </body>
 </html>
