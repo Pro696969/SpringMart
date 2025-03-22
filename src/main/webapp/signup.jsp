@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Hello World! This is the signup page</h1>
-<form onsubmit="return validateForm(event)">
+<form action="registered" method="post" >
     Enter Your Name: <input type="text" name="name" required><br>
     Enter Your Email-ID: <input type="email" name="email" required><br>
     Enter Your Password: <input type="password" id="password" name="password" required><br>
@@ -27,32 +27,13 @@
     <option value="Australia">Australia</option>
     <option value="Brazil">Brazil</option>
 </select><br>
-    Your UserId Is: <input type="text" id="userid" name="userid" readonly><br>
     <input type="submit" value="Submit">
 </form>
 
-<script type="text/javascript">
-    function validateForm(event) {
-        event.preventDefault(); // Prevent form submission
-
-        var password = document.getElementById("password").value;
-        var checkpassw = document.getElementById("checkpassw").value;
-
-        if (password !== checkpassw) {
-            alert("Passwords do not match! Please re-enter.");
-            return false;
-        }
-
-        generateid();
-        alert("User Registered Successfully");
-    }
-
-    function generateid() {
-        var min = 100000;
-        var max = 999999;
-        var userid = Math.floor(Math.random() * (max - min + 1)) + min;
-        document.getElementById("userid").value = userid;
-    }
-</script>
+<c:if test="${not empty error}">
+    <script>
+        alert("${error}");
+    </script>
+</c:if>
 </body>
 </html>
