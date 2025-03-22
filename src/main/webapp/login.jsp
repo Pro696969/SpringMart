@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+</head>
+<body>
+<h1>Login</h1>
+
+<form action="loggedin" method="post">
+    Enter User ID: <input type="text" name="userid" required><br>
+    Enter Password: <input type="password" name="password" required><br>
+    <input type="submit" value="Login">
+</form>
+
+<p>Don't have an account? <a href="signup.jsp">Sign up here</a></p>
+<c:if test="${not empty error}">
+    <script>
+        alert("${error}");
+    </script>
+</c:if>
+</body>
+</html>

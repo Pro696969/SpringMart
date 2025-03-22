@@ -46,7 +46,6 @@ public class SignupController {
         }
         else {
             redirectAttributes.addFlashAttribute("error", "Incorrect password. Try again!");
-
             return "redirect:/signup";
         }
 

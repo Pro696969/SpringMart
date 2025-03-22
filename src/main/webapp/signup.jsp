@@ -29,6 +29,7 @@
 </select><br>
     <input type="submit" value="Submit">
 </form>
+<a href="login.jsp">Login</a>
 
 <c:if test="${not empty error}">
     <script>
