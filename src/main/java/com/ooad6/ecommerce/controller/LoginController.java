@@ -34,7 +34,7 @@ public class LoginController {
             session.setAttribute("userid", userid);
             return "welcome.jsp";
         } else {
-            redirectAttributes.addFlashAttribute("error", "Incorrect password or UserId. Try again!");
+            redirectAttributes.addAttribute("error", "Incorrect password or UserId. Try again!");
             return "redirect:/login";
         }
     }

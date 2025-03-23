@@ -4,6 +4,16 @@
 <head>
     <meta charset="utf-8">
     <title>Login</title>
+    <script>
+        window.onload = function () {
+            const params = new URLSearchParams(window.location.search);
+            const error = params.get("error");
+            if (error) {
+                alert(error);
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        };
+    </script>
 </head>
 <body>
 <h1>Login</h1>
@@ -15,10 +25,6 @@
 </form>
 
 <p>Don't have an account? <a href="signup.jsp">Sign up here</a></p>
-<c:if test="${not empty error}">
-    <script>
-        alert("${error}");
-    </script>
-</c:if>
+
 </body>
 </html>

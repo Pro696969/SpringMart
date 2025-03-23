@@ -45,7 +45,7 @@ public class SignupController {
             return "register.jsp";
         }
         else {
-            redirectAttributes.addFlashAttribute("error", "Incorrect password. Try again!");
+            redirectAttributes.addAttribute("error", "Incorrect password. Try again!");
             return "redirect:/signup";
         }
 

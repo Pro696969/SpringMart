@@ -3,7 +3,17 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Sign Up Page</title>
+    <title>Sign Up </title>
+    <script>
+        window.onload = function () {
+            const params = new URLSearchParams(window.location.search);
+            const error = params.get("error");
+            if (error) {
+                alert(error);
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        };
+    </script>
 </head>
 <body>
 <h1>Hello World! This is the signup page</h1>
@@ -31,10 +41,5 @@
 </form>
 <a href="login.jsp">Login</a>
 
-<c:if test="${not empty error}">
-    <script>
-        alert("${error}");
-    </script>
-</c:if>
 </body>
 </html>
