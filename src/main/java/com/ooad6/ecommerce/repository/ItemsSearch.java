@@ -7,6 +7,5 @@ import java.util.List;
 
 @Repository
 public interface ItemsSearch extends MongoRepository<Items, String> {
-    List<Items> findAll();
 
 }

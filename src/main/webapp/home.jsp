@@ -7,11 +7,9 @@
 <body>
 <form>
     Enter: <input type="text" name="typing">
+    <button>Search</button>
+    <button>Cart</button>
 </form>
-<button>Search</button>
-<button>Cart</button>
-<h2>Items Available</h2>
-
 <h2>Available Items</h2>
 
 <c:if test="${empty items}">
@@ -20,16 +18,23 @@
 
 <c:if test="${not empty items}">
     <table>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Cost </th>
+            <th>Stock</th>
+            <th>Category</th>
+            <th>Review</th>
+        </tr>
         <c:forEach var="item" items="${items}">
-            <c:forEach var="lini" items="${item}">
-                <tr>
-                    <td>${lini.name}</td>
-                    <td>${description}</td>
-                    <td>${cost}</td>
-                    <td>${stock}</td>
-                    <td>${category}</td>
-                </tr>
-            </c:forEach>
+            <tr>
+                <td>${item.Name}</td>
+                <td>${item.Description}</td>
+                <td>${item.Cost}</td>
+                <td>${item.Stock}</td>
+                <td>${item.Category}</td>
+                <td>${item.Review}</td>
+            </tr>
         </c:forEach>
     </table>
 </c:if>

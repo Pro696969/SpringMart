@@ -1,32 +1,15 @@
 package com.ooad6.ecommerce.model;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "Items")
 public class Items {
-
-    @Id
-    private String id;  // MongoDB _id field
-
-    @Field("Name")
-    private String name;
-
-    @Field("Cost")
-    private int cost;
-
-    @Field("Stock")
-    private int stock;
-
-    @Field("Description")
-    private String description;
-
-    @Field("Category")
-    private String category;
-
-    @Field("Review")
-    private String review;
+    private String Name;
+    private int Cost;
+    private int Stock;
+    private String Description;
+    private String Category;
+    private String Review;
 
     public Items() {
     }
@@ -34,71 +17,60 @@ public class Items {
     @Override
     public String toString() {
         return "Items{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", cost=" + cost +
-                ", stock=" + stock +
-                ", description='" + description + '\'' +
-                ", category='" + category + '\'' +
-                ", review='" + review + '\'' +
+                "Name='" + Name + '\'' +
+                ", Cost=" + Cost +
+                ", Stock=" + Stock +
+                ", Description='" + Description + '\'' +
+                ", Category='" + Category + '\'' +
+                ", Review='" + Review + '\'' +
                 '}';
     }
 
-    // Getters and Setters
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        Name = name;
     }
 
     public int getCost() {
-        return cost;
+        return Cost;
     }
 
     public void setCost(int cost) {
-        this.cost = cost;
+        Cost = cost;
     }
 
     public int getStock() {
-        return stock;
+        return Stock;
     }
 
     public void setStock(int stock) {
-        this.stock = stock;
+        Stock = stock;
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        Description = description;
     }
 
     public String getCategory() {
-        return category;
+        return Category;
     }
 
     public void setCategory(String category) {
-        this.category = category;
+        Category = category;
     }
 
     public String getReview() {
-        return review;
+        return Review;
     }
 
     public void setReview(String review) {
-        this.review = review;
+        Review = review;
     }
 }
