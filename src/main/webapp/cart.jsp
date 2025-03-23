@@ -11,7 +11,7 @@
     <button>-</button> Product 2 <button>+</button><br><br>
     <button>-</button> Product 3 <button>+</button><br><br>
     <button>-</button> Product 4 <button>+</button><br><br>
-
+    Your total amount is:<br><br>
     <button>Proceed to Payment</button>
 </form>
 </body>

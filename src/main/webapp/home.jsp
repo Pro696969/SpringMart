@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +7,9 @@
 </head>
 <body>
 <form>
-    Enter: <input type="text" name="typing">
+    Enter: <label>
+    <input type="text" name="typing">
+</label>
     <button>Search</button>
     <button>Cart</button>
 </form>
@@ -25,6 +28,7 @@
             <th>Stock</th>
             <th>Category</th>
             <th>Review</th>
+            <th>Action</th>
         </tr>
         <c:forEach var="item" items="${items}">
             <tr>
@@ -34,7 +38,15 @@
                 <td>${item.Stock}</td>
                 <td>${item.Category}</td>
                 <td>${item.Review}</td>
+                <td>
+                    <!-- Button to Perform Action -->
+                    <form method="post">
+                        <input type="hidden" name="itemId" value="${item.id}">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </td>
             </tr>
+
         </c:forEach>
     </table>
 </c:if>

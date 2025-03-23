@@ -6,6 +6,7 @@ import com.ooad6.ecommerce.repository.ItemsSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -27,6 +28,8 @@ public class HomeController {
 
         // Debugging log to check if items are fetched
         System.out.println("Fetched items from DB: " + itemsList);
+        System.out.println("Fetched items from MongoDB:");
+
 
         // Add the list to the model to be used in the JSP view
         model.addAttribute("items", itemsList);
