@@ -1,4 +1,4 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,14 +39,12 @@
                 <td>${item.Category}</td>
                 <td>${item.Review}</td>
                 <td>
-                    <!-- Button to Perform Action -->
                     <form method="post">
                         <input type="hidden" name="itemId" value="${item.id}">
                         <button type="submit">Add to Cart</button>
                     </form>
                 </td>
             </tr>
-
         </c:forEach>
     </table>
 </c:if>

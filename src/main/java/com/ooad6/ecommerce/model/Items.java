@@ -16,7 +16,7 @@ public class Items {
 
     @Override
     public String toString() {
-        return "Items{" +
+        return "{" +
                 "Name='" + Name + '\'' +
                 ", Cost=" + Cost +
                 ", Stock=" + Stock +

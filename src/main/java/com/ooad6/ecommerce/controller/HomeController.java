@@ -28,7 +28,9 @@ public class HomeController {
 
         // Debugging log to check if items are fetched
         System.out.println("Fetched items from DB: " + itemsList);
-        System.out.println("Fetched items from MongoDB:");
+        if (itemsList.isEmpty()) {
+            System.out.println("No items found in database!");
+        }
 
 
         // Add the list to the model to be used in the JSP view
