@@ -4,13 +4,29 @@
 <html>
 <head>
     <title>Home Page</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
+    <script>
+        function addToCart(itemId, itemName) {
+            $.ajax({
+                type: "POST",
+                url: "/addToCart",
+                data: { itemId: itemId },
+                success: function(response) {
+                    alert(itemName + " has been added to your cart!"); // Popup alert
+                },
+                error: function() {
+                    alert("Failed to add item to cart.");
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 <h1>Welcome to the Homepage</h1>
 <form>
     <label><input type="text" name="Search-bar" placeholder="Search here"></label>
     <button>Search</button>
-    <button><a href="/cart.jsp">Cart</a></button>
+    <button><a href="/Cart">Cart</a></button>
 </form>
 <c:if test="${not empty items}">
     <h2>Items List</h2>
@@ -34,10 +50,7 @@
                 <td>${item.description}</td>
                 <td>${item.category}</td>
                 <td>
-                    <form action="addToCart.jsp" method="post">
-                        <input type="hidden" name="itemId" value="${item.id}"/>
-                        <button type="submit">Add to Cart</button>
-                    </form>
+                    <button onclick="addToCart('${item.id}', '${item.name}')">Add to Cart</button>
                 </td>
             </tr>
         </c:forEach>

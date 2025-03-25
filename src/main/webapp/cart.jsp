@@ -1,18 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Cart</title>
+    <title>Shopping Cart</title>
 </head>
 <body>
-<h1>Shopping Cart</h1>
-<form action="homepage">
-    <button>-</button> Product 1 <button>+</button><br><br>
-    <button>-</button> Product 2 <button>+</button><br><br>
-    <button>-</button> Product 3 <button>+</button><br><br>
-    <button>-</button> Product 4 <button>+</button><br><br>
-    Your total amount is:<br><br>
-    <button>Proceed to Payment</button>
-</form>
+<h1>Your Shopping Cart</h1>
+
+<c:if test="${not empty sessionScope.cart}">
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Cost</th>
+            <th>Category</th>
+        </tr>
+        <c:forEach items="${sessionScope.cart}" var="item">
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.cost}</td>
+                <td>${item.category}</td>
+            </tr>
+        </c:forEach>
+    </table>
+    <br>
+    <form action="clearCart.jsp" method="post">
+        <button type="submit">Clear Cart</button>
+    </form>
+</c:if>
+
+<c:if test="${empty sessionScope.cart}">
+    <p>Your cart is empty.</p>
+</c:if>
+
+<a href="/Homepage">Back to Home</a>
 </body>
 </html>
