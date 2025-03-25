@@ -26,40 +26,18 @@ public class HomeController {
 
     @RequestMapping("/Homepage")
     public String homepage(Model model) {
-        // Retrieve all items from MongoDB
-
         List<Items> itemsList = itemRepository.findAll();
-
-        // Debugging log to check if items are fetched
-        System.out.println("Fetched items from DB: " + itemsList);
-        if (itemsList.isEmpty()) {
-            System.out.println("No items found in database!");
-        }
-
-
-        // Add the list to the model to be used in the JSP view
         model.addAttribute("items", itemsList);
-
-        return "home.jsp"; // Ensure JSP is named home.jsp
+        return "home.jsp";
     }
+
     @PostMapping("/addToCart")
     @ResponseBody
-    public String addToCart(@RequestParam("itemId") String itemId) {
-        Optional<Items> itemOpt = itemRepository.findById(itemId);
-
-        if (itemOpt.isPresent()) {
-            Items item = itemOpt.get();
-
-            // Create a new Cart object
-            Cart cartItem = new Cart(item.getId(), item.getName(), item.getCost(), 1);
-            cartRepository.save(cartItem); // Save to MongoDB
-
-            System.out.println("Added to Cart: " + item.getName());
-            return "Item added to cart successfully!";
-        } else {
-            System.out.println("Item not found for ID: " + itemId);
-            return "Item not found!";
-        }
+    public String addToCart(@RequestParam String itemId, @RequestParam String itemName,
+                            @RequestParam int cost, @RequestParam int qty,
+                            @RequestParam String description) {
+        Cart cartItem = new Cart(itemId, itemName, cost, qty, description);
+        cartRepository.save(cartItem);
+        return itemName+" added to cart!";
     }
-
 }

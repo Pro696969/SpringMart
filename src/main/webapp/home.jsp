@@ -4,15 +4,16 @@
 <html>
 <head>
     <title>Home Page</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        function addToCart(itemId, itemName) {
+        function addToCart(itemId, itemName, cost, description) {
+            let qty = 1; // Default quantity set to 1
             $.ajax({
                 type: "POST",
                 url: "/addToCart",
-                data: { itemId: itemId },
+                data: { itemId: itemId, itemName: itemName, cost: cost, description: description, qty: qty },
                 success: function(response) {
-                    alert(itemName + " has been added to your cart!"); // Popup alert
+                    alert(response);
                 },
                 error: function() {
                     alert("Failed to add item to cart.");
@@ -26,7 +27,7 @@
 <form>
     <label><input type="text" name="Search-bar" placeholder="Search here"></label>
     <button>Search</button>
-    <button><a href="/Cart">Cart</a></button>
+    <a href="/Cart">Cart</a>
 </form>
 <c:if test="${not empty items}">
     <h2>Items List</h2>
@@ -34,7 +35,7 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Cost</th>
+            <th>Price(in Rs.)</th>
             <th>Stock</th>
             <th>Description</th>
             <th>Category</th>
@@ -50,7 +51,9 @@
                 <td>${item.description}</td>
                 <td>${item.category}</td>
                 <td>
-                    <button onclick="addToCart('${item.id}', '${item.name}')">Add to Cart</button>
+                    <button onclick="addToCart('${item.id}', '${item.name}', ${item.cost}, '${item.description}')">
+                        Add to Cart
+                    </button>
                 </td>
             </tr>
         </c:forEach>

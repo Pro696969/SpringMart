@@ -4,32 +4,64 @@
 <html>
 <head>
     <title>Shopping Cart</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function updateQty(itemId, change) {
+            let qtySpan = document.getElementById("qty_" + itemId);
+            let totalSpan = document.getElementById("total_" + itemId);
+            let totalCostSpan = document.getElementById("totalCost");
+
+            let currentQty = parseInt(qtySpan.innerText);
+            let newQty = currentQty + change;
+
+            if (newQty < 1) return; // Prevent quantity from going below 1
+
+            fetch('/updateCartQty?itemId=' + itemId + '&change=' + change, {
+                method: 'POST'
+            })
+                .then(response => response.text())
+                .then(updatedTotalCost => {
+                    qtySpan.innerText = newQty;
+                    let costPerItem = parseInt(totalSpan.innerText) / currentQty;
+                    totalSpan.innerText = (costPerItem * newQty).toFixed(2);
+                    totalCostSpan.innerText = updatedTotalCost;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
 </head>
 <body>
 <h1>Your Shopping Cart</h1>
 
-<c:if test="${not empty sessionScope.cart}">
+<c:if test="${not empty cartItems}">
     <table border="1">
         <tr>
             <th>Name</th>
             <th>Cost</th>
-            <th>Category</th>
+            <th>Quantity</th>
+            <th>Total cost</th>
         </tr>
-        <c:forEach items="${sessionScope.cart}" var="item">
+        <c:forEach items="${cartItems}" var="item">
             <tr>
                 <td>${item.name}</td>
                 <td>${item.cost}</td>
-                <td>${item.category}</td>
+                <td>
+                    <button onclick="updateQty('${item.id}', -1)">-</button>
+                    <span id="qty_${item.id}">${item.qty}</span>
+                    <button onclick="updateQty('${item.id}', 1)">+</button>
+                </td>
+                <td id="total_${item.id}">${item.cost * item.qty}</td>
             </tr>
         </c:forEach>
     </table>
     <br>
-    <form action="clearCart.jsp" method="post">
+    <form action="/clearCart" method="post">
         <button type="submit">Clear Cart</button>
     </form>
+    <h3>Total Cost: Rs. <span id="totalCost">${totalCost}</span></h3>
 </c:if>
 
-<c:if test="${empty sessionScope.cart}">
+<c:if test="${empty cartItems}">
     <p>Your cart is empty.</p>
 </c:if>
 
