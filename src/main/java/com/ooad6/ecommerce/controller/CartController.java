@@ -78,7 +78,7 @@ public class CartController {
 
         return "redirect:/Cart";
     }
-    
+
     private int getTotalCartCost() {
         List<Cart> cartList = cartRepository.findAll();
         return cartList.stream().mapToInt(item -> item.getCost() * item.getQty()).sum();
