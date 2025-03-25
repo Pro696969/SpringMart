@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Arrays" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,17 +9,17 @@
 </head>
 <body>
 <form>
-    Enter: <label>
-    <input type="text" name="typing">
+<label>
+    <input type="text" name="typing" placeholder="Search here">
 </label>
     <button>Search</button>
     <button>Cart</button>
 </form>
 <h2>Available Items</h2>
 
-<c:if test="${empty items}">
-    <p class="no-items">No items found!</p>
-</c:if>
+<%--<c:if test="${empty items}">--%>
+<%--    <p class="no-items">No items found!</p>--%>
+<%--</c:if>--%>
 
 <c:if test="${not empty items}">
     <table>
@@ -38,12 +40,6 @@
                 <td>${item.Stock}</td>
                 <td>${item.Category}</td>
                 <td>${item.Review}</td>
-                <td>
-                    <form method="post">
-                        <input type="hidden" name="itemId" value="${item.id}">
-                        <button type="submit">Add to Cart</button>
-                    </form>
-                </td>
             </tr>
         </c:forEach>
     </table>
