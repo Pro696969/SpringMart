@@ -4,6 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "Items")
 public class Items {
+    private String id;
     private String Name;
     private int Cost;
     private int Stock;
@@ -17,13 +18,22 @@ public class Items {
     @Override
     public String toString() {
         return "{" +
-                "Name='" + Name + '\'' +
+                "id='" + id + '\'' +
+                ", Name='" + Name + '\'' +
                 ", Cost=" + Cost +
                 ", Stock=" + Stock +
                 ", Description='" + Description + '\'' +
                 ", Category='" + Category + '\'' +
                 ", Review='" + Review + '\'' +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
