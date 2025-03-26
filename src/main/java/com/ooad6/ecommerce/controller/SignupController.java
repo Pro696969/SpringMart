@@ -23,7 +23,7 @@ public class SignupController {
         return "signup.jsp";
     }
 
-    @RequestMapping("registered")
+    @RequestMapping("/registered")
     public String registered(
             @RequestParam("name") String name,
             @RequestParam("email") String email,
@@ -36,13 +36,12 @@ public class SignupController {
             RedirectAttributes redirectAttributes
     ) {
         if (password.equals(checkpassw)) {
-            session.setAttribute("name", name);
+//            session.setAttribute("name", name);
             int userid = new Random().nextInt(900000) + 100000;
             session.setAttribute("userid", userid);
             User user = new User( name, email, password, address, phoneNumber, country, userid);
             userRepository.save(user);
-
-            return "register.jsp";
+            return "redirect:/Homepage";
         }
         else {
             redirectAttributes.addAttribute("error", "Incorrect password. Try again!");

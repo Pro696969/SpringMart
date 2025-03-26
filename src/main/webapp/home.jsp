@@ -24,6 +24,7 @@
 </head>
 <body>
 <h1>Welcome to the Homepage</h1>
+<h1> User Id: ${userid}</h1>
 <form>
     <label><input type="text" name="Search-bar" placeholder="Search here"></label>
     <button>Search</button>

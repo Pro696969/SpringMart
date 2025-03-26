@@ -32,7 +32,7 @@ public class LoginController {
 
         if (user.isPresent() && user.get().getPassword().equals(password)) {
             session.setAttribute("userid", userid);
-            return "welcome.jsp";
+            return "redirect:/Homepage";
         } else {
             redirectAttributes.addAttribute("error", "Incorrect password or UserId. Try again!");
             return "redirect:/login";
