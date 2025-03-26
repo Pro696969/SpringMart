@@ -41,8 +41,10 @@ public class SignupController {
             session.setAttribute("userid", userid);
             User user = new User( name, email, password, address, phoneNumber, country, userid);
             userRepository.save(user);
-            return "redirect:/Homepage";
+//            return "redirect:/Homepage";
+            return "register.jsp";
         }
+
         else {
             redirectAttributes.addAttribute("error", "Incorrect password. Try again!");
             return "redirect:/signup";
