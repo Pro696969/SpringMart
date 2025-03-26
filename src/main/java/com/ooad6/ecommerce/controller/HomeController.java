@@ -18,7 +18,7 @@ public class HomeController {
     @Autowired
     private CartRepository cartRepository;
 
-    @RequestMapping("/Homepage")
+    @RequestMapping("/homepage")
     public String homepage(Model model) {
         List<Items> itemsList = itemRepository.findAll();
         model.addAttribute("items", itemsList);

@@ -65,5 +65,14 @@
 <c:if test="${empty items}">
     <p>No items found.</p>
 </c:if>
+
+<script>
+    $(document).ready(function () {
+        var userId = "${userid}";
+        if (!userId) {
+            window.location.href = "/signup";
+        }
+    });
+</script>
 </body>
 </html>
