@@ -30,6 +30,9 @@
     <button>Search</button>
     <a href="/Cart">Cart</a>
 </form>
+<form action="/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
 <c:if test="${not empty items}">
     <h2>Items List</h2>
     <table border="1">
