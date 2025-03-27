@@ -65,6 +65,6 @@
     <p>Your cart is empty.</p>
 </c:if>
 
-<a href="/Homepage">Back to Home</a>
+<a href="/homepage">Back to Home</a>
 </body>
 </html>
