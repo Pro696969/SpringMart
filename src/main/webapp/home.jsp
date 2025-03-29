@@ -20,14 +20,36 @@
                 }
             });
         }
+        function searchItems() {
+            var query = document.getElementById("searchBox").value.trim();
+            if (query === "") return;
+
+            fetch("/search/" + encodeURIComponent(query))
+                .then(response => response.json())
+                .then(data => {
+                    let resultsDiv = document.getElementById("searchResults");
+                    resultsDiv.innerHTML = "";
+
+                    data.forEach(item => {
+                        let highlightedName = item.name.replace(
+                            new RegExp(query, "gi"),
+                            match => `<span style="background-color: yellow; font-weight: bold;">${match}</span>`
+                        );
+
+                        resultsDiv.innerHTML += `<p>${highlightedName} - ${item.description} ($${item.price})</p>`;
+                    });
+                })
+                .catch(error => console.error("Search failed", error));
+        }
     </script>
 </head>
 <body>
 <h1>Welcome to the Homepage</h1>
 <h1> User Id: ${userid}</h1>
 <form>
-    <label><input type="text" name="Search-bar" placeholder="Search here"></label>
-    <button>Search</button>
+    <label><input type="text" id = "searchBox" name="Search-bar" placeholder="Search here"></label>
+    <button onclick="searchItems()">Search</button>
+    <div id="searchResults"></div>
     <a href="/Cart">Cart</a>
 </form>
 <form action="/logout" method="post">

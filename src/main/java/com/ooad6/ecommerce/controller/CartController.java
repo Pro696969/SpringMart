@@ -3,7 +3,7 @@ package com.ooad6.ecommerce.controller;
 import com.ooad6.ecommerce.model.Cart;
 import com.ooad6.ecommerce.model.Items;
 import com.ooad6.ecommerce.repository.CartRepository;
-import com.ooad6.ecommerce.repository.ItemsSearch;
+import com.ooad6.ecommerce.repository.ItemsShow;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ public class CartController {
     private CartRepository cartRepository;
 
     @Autowired
-    private ItemsSearch itemRepository;
+    private ItemsShow itemRepository;
 
     @RequestMapping("/Cart")
     public String cart(Model model) {
