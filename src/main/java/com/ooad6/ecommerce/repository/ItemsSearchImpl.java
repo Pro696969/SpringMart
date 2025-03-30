@@ -37,9 +37,9 @@ public class ItemsSearchImpl implements ItemsSearch{
         // MongoDB Search Query
         FindIterable<Document> result = collection.find(
                 new Document("$or", Arrays.asList(
-                        new Document("name", new Document("$regex", text).append("$options", "i")),
-                        new Document("description", new Document("$regex", text).append("$options", "i")),
-                        new Document("category", new Document("$regex", text).append("$options", "i"))
+                        new Document("Name", new Document("$regex", text).append("$options", "i")),
+                        new Document("Description", new Document("$regex", text).append("$options", "i")),
+                        new Document("Category", new Document("$regex", text).append("$options", "i"))
                 ))
         ).limit(5);
 

@@ -20,35 +20,94 @@
                 }
             });
         }
-        function searchItems() {
+        function searchItems(event) {
+            // Prevent default form submission
+            if (event) event.preventDefault();
+
             var query = document.getElementById("searchBox").value.trim();
-            if (query === "") return;
+            if (query === "") {
+                // Reset all highlighting if search is empty
+                resetHighlighting();
+                return;
+            }
 
-            fetch("/search/" + encodeURIComponent(query))
-                .then(response => response.json())
-                .then(data => {
-                    let resultsDiv = document.getElementById("searchResults");
-                    resultsDiv.innerHTML = "";
+            // Reset previous highlighting
+            resetHighlighting();
 
-                    data.forEach(item => {
-                        let highlightedName = item.name.replace(
-                            new RegExp(query, "gi"),
-                            match => `<span style="background-color: yellow; font-weight: bold;">${match}</span>`
-                        );
+            // Find and highlight matching items in the existing table
+            var table = document.querySelector("table tbody");
+            var rows = table.getElementsByTagName("tr");
+            var found = false;
 
-                        resultsDiv.innerHTML += `<p>${highlightedName} - ${item.description} ($${item.price})</p>`;
-                    });
-                })
-                .catch(error => console.error("Search failed", error));
+            for (var i = 0; i < rows.length; i++) {
+                var nameCell = rows[i].getElementsByTagName("td")[0]; // First column contains the name
+                var descCell = rows[i].getElementsByTagName("td")[3]; // Fourth column contains description
+                var catCell = rows[i].getElementsByTagName("td")[4];  // Fifth column contains category
+
+                if (nameCell) {
+                    var nameText = nameCell.textContent || nameCell.innerText;
+                    var descText = descCell.textContent || descCell.innerText;
+                    var catText = catCell.textContent || catCell.innerText;
+
+                    // Check if the search query matches any of the fields
+                    if (nameText.toLowerCase().includes(query.toLowerCase()) ||
+                        descText.toLowerCase().includes(query.toLowerCase()) ||
+                        catText.toLowerCase().includes(query.toLowerCase())) {
+
+                        // Highlight the matching row
+                        rows[i].style.backgroundColor = "#ffffc0"; // Light yellow background
+
+                        // Highlight the matching text in the name
+                        if (nameText.toLowerCase().includes(query.toLowerCase())) {
+                            nameCell.innerHTML = highlightText(nameText, query);
+                        }
+
+                        found = true;
+                    }
+                }
+            }
+
+            // Show a message if no matches found
+            var resultsDiv = document.getElementById("searchResults");
+            if (!found) {
+                resultsDiv.innerHTML = "<p>No matching items found.</p>";
+            } else {
+                resultsDiv.innerHTML = ""; // Clear any previous "no results" message
+            }
+        }
+
+        function resetHighlighting() {
+            // Reset row highlighting
+            var rows = document.querySelectorAll("table tbody tr");
+            for (var i = 0; i < rows.length; i++) {
+                rows[i].style.backgroundColor = "";
+            }
+
+            // Reset text highlighting in name cells
+            var nameCells = document.querySelectorAll("table tbody tr td:first-child");
+            for (var i = 0; i < nameCells.length; i++) {
+                var cell = nameCells[i];
+                cell.innerHTML = cell.innerText; // Remove any HTML formatting
+            }
+
+            // Clear search results message
+            document.getElementById("searchResults").innerHTML = "";
+        }
+
+        function highlightText(text, query) {
+            // Create a regex that matches the query text (case insensitive)
+            var regex = new RegExp('(' + query + ')', 'gi');
+            // Replace matching text with highlighted version
+            return text.replace(regex, '<span style="background-color: yellow; font-weight: bold;">$1</span>');
         }
     </script>
 </head>
 <body>
 <h1>Welcome to the Homepage</h1>
 <h1> User Id: ${userid}</h1>
-<form>
-    <label><input type="text" id = "searchBox" name="Search-bar" placeholder="Search here"></label>
-    <button onclick="searchItems()">Search</button>
+<form onsubmit="searchItems(event); return false;">
+    <label><input type="text" id="searchBox" name="Search-bar" placeholder="Search here"></label>
+    <button type="submit">Search</button>
     <div id="searchResults"></div>
     <a href="/Cart">Cart</a>
 </form>
