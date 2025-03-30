@@ -1,11 +1,11 @@
 package com.ooad6.ecommerce.model;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "Cart")
 public class Cart {
     private String id;
+    private int userid;
     private String name;
     private int cost;
     private int qty;
@@ -13,12 +13,20 @@ public class Cart {
 
     public Cart() {}
 
-    public Cart(String id, String name, int cost, int qty, String description) {
+    public Cart(String id, int userid, String name, int cost, int qty, String description) {
         this.id = id;
+        this.userid = userid;
         this.name = name;
         this.cost = cost;
         this.qty = qty;
         this.description = description;
+    }
+
+    public int getUserID() {
+        return userid;
+    }
+    public void setUserID(int userid) {
+        this.userid = userid;
     }
 
     public String getId() { return id; }

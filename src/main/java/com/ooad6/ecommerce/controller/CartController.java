@@ -20,7 +20,7 @@ public class CartController {
     @Autowired
     private ItemsShow itemRepository;
 
-    @RequestMapping("/Cart")
+    @RequestMapping("/cart")
     public String cart(Model model) {
         List<Cart> cartList = cartRepository.findAll();
         model.addAttribute("cartItems", cartList);
@@ -76,7 +76,7 @@ public class CartController {
         // Clear the cart
         cartRepository.deleteAll();
 
-        return "redirect:/Cart";
+        return "redirect:/cart";
     }
 
     private int getTotalCartCost() {

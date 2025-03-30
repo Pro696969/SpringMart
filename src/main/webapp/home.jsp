@@ -8,10 +8,17 @@
     <script>
         function addToCart(itemId, itemName, cost, description) {
             let qty = 1; // Default quantity set to 1
+            let userid = "${userid}";
+
+            if (!userid) {
+                alert("User ID is missing. Please log in.");
+                return;
+            }
+
             $.ajax({
                 type: "POST",
                 url: "/addToCart",
-                data: { itemId: itemId, itemName: itemName, cost: cost, description: description, qty: qty },
+                data: { itemId: itemId, userid: userid, itemName: itemName, cost: cost, description: description, qty: qty },
                 success: function(response) {
                     alert(response);
                 },
@@ -109,7 +116,7 @@
     <label><input type="text" id="searchBox" name="Search-bar" placeholder="Search here"></label>
     <button type="submit">Search</button>
     <div id="searchResults"></div>
-    <a href="/Cart">Cart</a>
+    <a href="/cart">Cart</a>
 </form>
 <form action="/logout" method="post">
     <button type="submit">Logout</button>
@@ -136,9 +143,13 @@
                 <td>${item.description}</td>
                 <td>${item.category}</td>
                 <td>
-                    <button onclick="addToCart('${item.id}', '${item.name}', ${item.cost}, '${item.description}')">
-                        Add to Cart
-                    </button>
+<%--                    <button onclick="addToCart('${item.id}', ${userid}, '${item.name}', '${item.cost}', '${item.description}')">--%>
+<%--                        Add to Cart--%>
+<%--                    </button>--%>
+                        <button onclick="addToCart('${item.id}', '${item.name}', '${item.cost}', '${item.description}')">
+                            Add to Cart
+                        </button>
+
                 </td>
             </tr>
         </c:forEach>

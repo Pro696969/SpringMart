@@ -32,12 +32,16 @@ public class HomeController {
 
     @PostMapping("/addToCart")
     @ResponseBody
-    public String addToCart(@RequestParam String itemId, @RequestParam String itemName,
+    public String addToCart(@RequestParam String itemId, @RequestParam int userid, @RequestParam String itemName,
                             @RequestParam int cost, @RequestParam int qty,
                             @RequestParam String description) {
-        Cart cartItem = new Cart(itemId, itemName, cost, qty, description);
+        if (userid == 0) {
+            return "User ID is missing!";
+        }
+
+        Cart cartItem = new Cart(itemId, userid, itemName, cost, qty, description);
         cartRepository.save(cartItem);
-        return itemName+" added to cart!";
+        return itemName+" added to cart! for user with ID " + userid;
     }
 
     @GetMapping("/search/{text}")
