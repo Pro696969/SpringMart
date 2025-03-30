@@ -59,8 +59,12 @@
         <button type="submit">Clear Cart</button>
     </form>
     <h3>Total Cost: Rs. <span id="totalCost">${totalCost}</span></h3>
-</c:if>
+<%--    <form action="/orders" method="post">--%>
+<%--        <button type="submit">Place Order</button>--%>
+<%--    </form>--%>
+    <a href="orders"><button>Place Order</button></a>
 
+</c:if>
 <c:if test="${empty cartItems}">
     <p>Your cart is empty.</p>
 </c:if>

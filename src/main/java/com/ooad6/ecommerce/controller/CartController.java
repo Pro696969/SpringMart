@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +22,10 @@ public class CartController {
     private ItemsShow itemRepository;
 
     @RequestMapping("/cart")
-    public String cart(Model model) {
-        List<Cart> cartList = cartRepository.findAll();
+    public String cart(Model model, HttpSession session) {
+        Object userIdObj = session.getAttribute("userid");
+        int userId = (Integer) userIdObj;
+        List<Cart> cartList = cartRepository.findByUserid(userId);
         model.addAttribute("cartItems", cartList);
 
         int totalCost = 0;
