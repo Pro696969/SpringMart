@@ -116,8 +116,10 @@
     <label><input type="text" id="searchBox" name="Search-bar" placeholder="Search here"></label>
     <button type="submit">Search</button>
     <div id="searchResults"></div>
-    <a href="/cart">Cart</a>
+    <br>
 </form>
+<a href="/cart"><button> Proceed to Cart </button></a>
+<br>
 <form action="/logout" method="post">
     <button type="submit">Logout</button>
 </form>

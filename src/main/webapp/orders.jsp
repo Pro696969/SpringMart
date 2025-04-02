@@ -38,7 +38,8 @@
 
     <h3>Total Cost: Rs. <span id="totalCost">${totalCost}</span></h3>
 </c:if>
-
+    <a href="payment.jsp"><button>Proceed to Payment</button></a>
+    <a href="cart.jsp"><button>Back to Cart</button></a>
 <br>
 </body>
 </html>

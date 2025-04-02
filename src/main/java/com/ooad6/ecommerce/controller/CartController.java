@@ -33,6 +33,7 @@ public class CartController {
             totalCost += item.getCost() * item.getQty();
         }
         model.addAttribute("totalCost", totalCost);
+        session.setAttribute("totalCost", totalCost);
 
         return "cart.jsp";
     }
