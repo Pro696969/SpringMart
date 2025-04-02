@@ -53,7 +53,7 @@
 <h3>Final Amount: <span id="finalAmount">Rs. ${totalCost}</span></h3>
 
 <!-- Payment Form -->
-<form action="/processPayment" method="post">
+<form action="/confirmOrder" method="post">
     <input type="hidden" name="totalCost" value="${totalCost}">
     <input type="hidden" name="finalAmount" id="finalAmountInput" value="${totalCost}">
 
@@ -62,14 +62,13 @@
     <input type="radio" name="paymentMethod" value="Cash on Delivery" required> Cash on Delivery<br>
     <input type="radio" name="paymentMethod" value="UPI" required> UPI<br>
 
-    <!-- UPI ID input field (only shows if UPI is selected) -->
     <div id="upiSection" style="display:none;">
         <label for="upiId">Enter UPI ID:</label>
         <input type="text" id="upiId" name="upiId">
     </div>
 
     <br>
-    <button type="submit">Proceed to Pay</button>
+    <button type="submit">Confirm Order</button>
 </form>
 
 <script>

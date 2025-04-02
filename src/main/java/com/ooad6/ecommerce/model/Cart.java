@@ -15,6 +15,18 @@ public class Cart {
 
     public Cart() {}
 
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "id='" + id + '\'' +
+                ", userid=" + userid +
+                ", name='" + name + '\'' +
+                ", cost=" + cost +
+                ", qty=" + qty +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
     public Cart(String id, int userid, String name, int cost, int qty, String description) {
         this.id = id;
         this.userid = userid;
