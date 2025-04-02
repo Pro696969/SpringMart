@@ -30,10 +30,19 @@ public class LoginController {
     ) {
         Optional<User> user = userRepository.findByuserId(userid);
 
-        if (user.isPresent() && user.get().getPassword().equals(password)) {
+        if (user.isPresent() && user.get().getPassword().equals(password))
+        {
             session.setAttribute("userid", userid);
-            return "redirect:/homepage";
-        } else {
+            if (user.get().getName().toLowerCase().contains("admin"))
+            {
+                return "redirect:/adminDashboard";
+            }
+            else
+            {
+                return "redirect:/homepage";
+            }
+        }
+        else {
             redirectAttributes.addAttribute("error", "Incorrect password or UserId. Try again!");
             return "redirect:/login";
         }
