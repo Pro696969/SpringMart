@@ -10,6 +10,7 @@ public class Orders {
     private int orderId;  // MongoDB auto-generates ID
     private int userId;
     private List<Cart> prodList;
+    private String paymentMethod;
     private LocalDateTime timestamp;
 
     public Orders() {
@@ -28,6 +29,9 @@ public class Orders {
     public LocalDateTime getTimestamp() { return timestamp; }
     public void setTimestamp(LocalDateTime timestamp) { this.timestamp = timestamp; }
 
+    public String getPaymentMethod() { return paymentMethod; }
+    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
+
     @Override
     public String toString() {
         return "Orders{" +
@@ -35,6 +39,7 @@ public class Orders {
                 ", userId=" + userId +
                 ", prodList=" + prodList +
                 ", timestamp=" + timestamp +
+                ", paymentMethod='" + paymentMethod + '\'' +
                 '}';
     }
 }

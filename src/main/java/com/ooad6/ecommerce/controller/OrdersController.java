@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
@@ -45,7 +46,7 @@ public class OrdersController {
     }
 
     @PostMapping("/confirmOrder")
-    public String confirmOrder(HttpSession session) {
+    public String confirmOrder(@RequestParam("paymentMethod") String paymentMethod, HttpSession session) {
         Object userIdObj = session.getAttribute("userid");
 
         if (userIdObj instanceof Integer) {
@@ -65,6 +66,7 @@ public class OrdersController {
             newOrder.setOrderId(orderId);
             newOrder.setUserId(userId);
             newOrder.setProdList(cartItems);
+            newOrder.setPaymentMethod(paymentMethod);
             newOrder.setTimestamp(LocalDateTime.now());
             System.out.println(newOrder.toString());
 
