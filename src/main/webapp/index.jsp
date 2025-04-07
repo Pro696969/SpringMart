@@ -7,5 +7,8 @@
 </head>
 <body>
 <h1>Welcome</h1>
+<button onclick="location.href='http://localhost:8080/signup'">Signup Here</button>
+<button onclick="location.href='http://localhost:8080/login'">Login Here</button>
+
 </body>
 </html>
