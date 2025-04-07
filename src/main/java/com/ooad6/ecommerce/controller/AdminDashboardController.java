@@ -21,7 +21,7 @@ public class AdminDashboardController {
         List<User> users = userRepository.findAll();
         System.out.println("Fetched Users: " + users); // Debugging Log
         model.addAttribute("users", users);
-        return "adminDashboard.jsp";  // Ensure this matches the JSP filename
+        return "adminDashboard";  // Ensure this matches the JSP filename
     }
 
 

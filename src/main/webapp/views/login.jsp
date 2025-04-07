@@ -24,7 +24,7 @@
     <input type="submit" value="Login">
 </form>
 
-<p>Don't have an account? <a href="signup.jsp">Sign up here</a></p>
+<p>Don't have an account? <button onclick="location.href='http://localhost:8080/signup'">Sign up here</button></p>
 
 </body>
 </html>

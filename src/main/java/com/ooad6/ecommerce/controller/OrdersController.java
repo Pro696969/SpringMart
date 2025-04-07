@@ -39,7 +39,7 @@ public class OrdersController {
             System.out.println(cartItems.toString());
             session.setAttribute("cartItems", cartItems);
             model.addAttribute("cartItems", cartItems);
-            return "orders.jsp";  // Redirect to orders.jsp
+            return "orders";  // Redirect to orders.jsp
         } else {
             return "redirect:/login"; // Redirect to login if userid is missing
         }
@@ -78,7 +78,7 @@ public class OrdersController {
             session.removeAttribute("cartItems");
 
             session.setAttribute("orderMessage", "Order placed successfully! Order ID: " + newOrder.getOrderId());
-            return "thankyou.jsp";
+            return "thankyou";
         } else {
             return "redirect:/login"; // Redirect to login if userid is missing
         }

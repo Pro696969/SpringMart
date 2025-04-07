@@ -39,7 +39,8 @@
 </select><br>
     <input type="submit" value="Submit">
 </form>
-<a href="login.jsp">Login</a>
+<p>Already have an account? <button onclick="location.href='http://localhost:8080/login'">Login here</button></p>
+
 
 </body>
 </html>

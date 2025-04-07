@@ -27,7 +27,7 @@ public class HomeController {
     public String homepage(Model model) {
         List<Items> itemsList = itemRepository.findAll();
         model.addAttribute("items", itemsList);
-        return "home.jsp";
+        return "home";
     }
 
     @PostMapping("/addToCart")
