@@ -3,6 +3,7 @@ package com.ooad6.ecommerce.controller;
 import com.ooad6.ecommerce.factory.OrderFactory;
 import com.ooad6.ecommerce.model.Cart;
 import com.ooad6.ecommerce.model.Orders;
+import com.ooad6.ecommerce.observer.OrderObserver;
 import com.ooad6.ecommerce.repository.CartRepository;
 import com.ooad6.ecommerce.repository.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class OrdersController {
 
     @Autowired
     private OrderFactory orderFactory;
+
+    @Autowired
+    private List<OrderObserver> observers;
 
     @GetMapping("/orders")
     public String showOrders(Model model, HttpSession session) {
@@ -58,6 +62,10 @@ public class OrdersController {
             // 🔥 Use the factory to create the order
             Orders newOrder = orderFactory.createOrder(userId, cartItems, paymentMethod);
             ordersRepository.save(newOrder);
+
+            for (OrderObserver observer : observers) {
+                observer.onOrderPlaced(newOrder);
+            }
 
             cartRepository.deleteAll(cartItems);
             session.removeAttribute("cartItems");
