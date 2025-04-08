@@ -20,7 +20,7 @@ public class SignupController {
     @RequestMapping("signup")
     public String sign() {
         System.out.println("This is Signup");
-        return "signup.jsp";
+        return "signup";
     }
 
     @RequestMapping("/registered")
@@ -42,7 +42,7 @@ public class SignupController {
             User user = new User( name, email, password, address, phoneNumber, country, userid);
             userRepository.save(user);
 //            return "redirect:/Homepage";
-            return "register.jsp";
+            return "register";
         }
 
         else {

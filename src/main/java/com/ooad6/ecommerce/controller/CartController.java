@@ -35,7 +35,7 @@ public class CartController {
         model.addAttribute("totalCost", totalCost);
         session.setAttribute("totalCost", totalCost);
 
-        return "cart.jsp";
+        return "cart";
     }
 
     @PostMapping("/updateCartQty")

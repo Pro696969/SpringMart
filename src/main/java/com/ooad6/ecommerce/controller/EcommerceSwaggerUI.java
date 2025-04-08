@@ -22,7 +22,7 @@ public class EcommerceSwaggerUI {
     @RequestMapping("/")
     public String redirect()  {
         System.out.println("This is Home");
-        return "index.jsp";
+        return "index";
     }
 }
 

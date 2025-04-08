@@ -18,7 +18,7 @@ public class LoginController {
 
     @RequestMapping("/login")
     public String login() {
-        return "login.jsp";
+        return "login";
     }
 
     @RequestMapping("loggedin")
