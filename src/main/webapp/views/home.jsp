@@ -5,6 +5,7 @@
 <head>
     <title>Home Page</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
     <script>
         function addToCart(itemId, itemName, cost, description) {
             let qty = 1; // Default quantity set to 1
@@ -110,21 +111,25 @@
     </script>
 </head>
 <body>
-<h1>Welcome to the Homepage</h1>
-<h1> User Id: ${userid}</h1>
-<form onsubmit="searchItems(event); return false;">
+<header>
+    <h1>Welcome to the Homepage</h1>
+    <div class="action-buttons">
+        <h3> ${userid}</h3>
+        <a href="/cart"><button> Proceed to Cart </button></a>
+        <form action="/logout" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+</header>
+<form class="search-form" onsubmit="searchItems(event); return false;">
     <label><input type="text" id="searchBox" name="Search-bar" placeholder="Search here"></label>
     <button type="submit">Search</button>
     <div id="searchResults"></div>
     <br>
 </form>
-<a href="/cart"><button> Proceed to Cart </button></a>
 <br>
-<form action="/logout" method="post">
-    <button type="submit">Logout</button>
-</form>
+
 <c:if test="${not empty items}">
-    <h2>Items List</h2>
     <table border="1">
         <thead>
         <tr>
