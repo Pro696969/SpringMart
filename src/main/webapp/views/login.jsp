@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <title>Login</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+
     <script>
         window.onload = function () {
             const params = new URLSearchParams(window.location.search);
@@ -24,7 +26,8 @@
     <input type="submit" value="Login">
 </form>
 
-<p>Don't have an account? <button onclick="location.href='http://localhost:8080/signup'">Sign up here</button></p>
+<p>Don't have an account?</p>
+<button onclick="location.href='http://localhost:8080/signup'">Sign up here</button>
 
 </body>
 </html>

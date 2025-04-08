@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to OOAD</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
+
 </head>
 <body>
 <h1>Welcome</h1>

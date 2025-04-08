@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <title>Sign Up </title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/signup.css">
+
     <script>
         window.onload = function () {
             const params = new URLSearchParams(window.location.search);
@@ -39,7 +41,8 @@
 </select><br>
     <input type="submit" value="Submit">
 </form>
-<p>Already have an account? <button onclick="location.href='http://localhost:8080/login'">Login here</button></p>
+<p>Already have an account?</p>
+<button onclick="location.href='http://localhost:8080/login'">Login here</button>
 
 
 </body>
