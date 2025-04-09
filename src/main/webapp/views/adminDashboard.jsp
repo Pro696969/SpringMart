@@ -9,6 +9,12 @@
 <body>
 <h1>Admin Dashboard</h1>
 
+<a href="${pageContext.request.contextPath}/adminDashboard/order-history">
+    <button>View Order History</button>
+</a>
+
+
+
 <h2>All Users</h2>
 <%
     List<User> users = (List<User>) request.getAttribute("users");
