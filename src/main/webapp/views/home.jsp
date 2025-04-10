@@ -109,6 +109,12 @@
             // Replace matching text with highlighted version
             return text.replace(regex, '<span style="background-color: yellow; font-weight: bold;">$1</span>');
         }
+
+        function applySort() {
+            var sortBy = document.getElementById("sortBy").value;
+            var sortOrder = document.getElementById("sortOrder").value;
+            window.location.href = "/homepage?sortBy=" + sortBy + "&sortOrder=" + sortOrder;
+        }
     </script>
 </head>
 <body>
@@ -128,6 +134,22 @@
     <div id="searchResults"></div>
     <br>
 </form>
+<br>
+
+<div>
+    <label for="sortBy">Sort By:</label>
+    <select id="sortBy" name="sortBy" onchange="applySort()">
+        <option value="">None</option>
+        <option value="cost">Cost</option>
+        <option value="stock">Stock</option>
+    </select>
+
+    <label for="sortOrder">Sort Order:</label>
+    <select id="sortOrder" name="sortOrder" onchange="applySort()">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+    </select>
+</div>
 <br>
 
 <c:if test="${not empty items}">
@@ -151,13 +173,9 @@
                 <td>${item.description}</td>
                 <td>${item.category}</td>
                 <td>
-<%--                    <button onclick="addToCart('${item.id}', ${userid}, '${item.name}', '${item.cost}', '${item.description}')">--%>
-<%--                        Add to Cart--%>
-<%--                    </button>--%>
-                        <button onclick="addToCart('${item.id}', '${item.name}', '${item.cost}', '${item.description}')">
-                            Add to Cart
-                        </button>
-
+                    <button onclick="addToCart('${item.id}', '${item.name}', '${item.cost}', '${item.description}')">
+                        Add to Cart
+                    </button>
                 </td>
             </tr>
         </c:forEach>

@@ -5,6 +5,7 @@ import com.ooad6.ecommerce.model.User;
 import com.ooad6.ecommerce.repository.CartRepository;
 import com.ooad6.ecommerce.repository.ItemsSearch;
 import com.ooad6.ecommerce.repository.UserRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.ui.Model;
 import com.ooad6.ecommerce.model.Items;
 import com.ooad6.ecommerce.repository.ItemsShow;
@@ -31,15 +32,42 @@ public class HomeController {
     private UserRepository userRepository;
 
     @RequestMapping("/homepage")
-    public String homepage(Model model, HttpSession session) {
-        List<Items> itemsList = itemRepository.findAll();
+    public String homepage(Model model, HttpSession session,
+                           @RequestParam(name = "sortBy", required = false) String sortBy,
+                           @RequestParam(name = "sortOrder", required = false, defaultValue = "asc") String sortOrder) {
+        Sort sort = null;
+
+        if (sortBy != null && !sortBy.isEmpty()) {
+            Sort.Direction direction = sortOrder.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+            if (sortBy.equalsIgnoreCase("cost")) {
+                sort = Sort.by(direction, "Cost");
+            } else if (sortBy.equalsIgnoreCase("stock")) {
+                sort = Sort.by(direction, "Stock");
+            }
+        }
+
+        List<Items> itemsList;
+        if (sort != null) {
+            itemsList = itemRepository.findAll(sort);
+        } else {
+            itemsList = itemRepository.findAll(); // Default: No sorting
+        }
+
         model.addAttribute("items", itemsList);
 
         Object userIdObj = session.getAttribute("userid");
-        int userId = (Integer) userIdObj;
+        if (userIdObj != null) { // Check if userIdObj is not null before casting
+            int userId = (Integer) userIdObj;
+            Optional<User> user = userRepository.findByuserId(userId);
+            if (user.isPresent()) { // Check if user is present before accessing
+                model.addAttribute("username", user.get().getName());
+            } else {
+                model.addAttribute("username", "Guest"); // Handle case where user is not found
+            }
+        } else {
+            model.addAttribute("username", "Guest"); // Handle case where userid is not in session
+        }
 
-        Optional<User> user = userRepository.findByuserId(userId);
-        model.addAttribute("username", user.get().getName());
         return "home";
     }
 
