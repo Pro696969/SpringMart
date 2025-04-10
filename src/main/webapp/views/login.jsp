@@ -19,6 +19,7 @@
 </head>
 <body>
 <h1>Login</h1>
+<h5>If administrator login with your credentials</h5>
 
 <form action="loggedin" method="post">
     Enter User ID: <input type="text" name="userid" required><br>
