@@ -4,10 +4,12 @@
 <head>
     <meta charset="utf-8">
     <title>Login</title>
-
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css">
 </head>
 <body>
-<h1>Hey your user id is ${userid}</h1>
-<button onclick="window.location.replace('http://localhost:8080/login')">Login</button>
+    <div class="container">
+        <h1>Hey your user id is ${userid}</h1>
+        <button onclick="window.location.replace('http://localhost:8080/login')">Login</button>
+    </div>
 </body>
 </html>
