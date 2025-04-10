@@ -27,6 +27,7 @@
                     alert("Failed to add item to cart.");
                 }
             });
+
         }
         function searchItems(event) {
             // Prevent default form submission
@@ -112,9 +113,9 @@
 </head>
 <body>
 <header>
-    <h1>Welcome to the Homepage</h1>
+    <h1>Welcome to the SpringMart</h1>
     <div class="action-buttons">
-        <h3> ${userid}</h3>
+        <h2>Hello, ${username}</h2>
         <a href="/cart"><button> Proceed to Cart </button></a>
         <form action="/logout" method="post">
             <button type="submit">Logout</button>

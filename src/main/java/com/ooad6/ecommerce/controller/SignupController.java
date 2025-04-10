@@ -4,6 +4,7 @@ import com.ooad6.ecommerce.model.User;
 import com.ooad6.ecommerce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -33,12 +34,15 @@ public class SignupController {
             @RequestParam("phno") String phoneNumber,
             @RequestParam("country") String country,
             HttpSession session,
-            RedirectAttributes redirectAttributes
+            RedirectAttributes redirectAttributes,
+            Model model
     ) {
         if (password.equals(checkpassw)) {
 //            session.setAttribute("name", name);
             int userid = new Random().nextInt(900000) + 100000;
             session.setAttribute("userid", userid);
+            model.addAttribute("name", name);
+
             User user = new User( name, email, password, address, phoneNumber, country, userid);
             userRepository.save(user);
 //            return "redirect:/Homepage";

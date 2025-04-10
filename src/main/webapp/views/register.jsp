@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Hey your user id is ${userid}</h1>
+        <h1>Hey ${name}, your user id is ${userid}</h1>
         <button onclick="window.location.replace('http://localhost:8080/login')">Login</button>
     </div>
 </body>
