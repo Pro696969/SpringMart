@@ -5,7 +5,7 @@
 <head>
     <title>Payment Page</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/payment.css">
     <script>
         function applyDiscount() {
             let totalCost = parseFloat(document.getElementById("totalCost").value);
@@ -38,38 +38,49 @@
 </head>
 <body>
 
-<h2>Complete Your Payment</h2>
+<div class="header">
+    <h1>Complete Payment</h1>
+    <a href="/orders"><button class="btn top-right-btn">Back to Orders</button></a>
+</div>
 
-<!-- Display Total Cost -->
-<h3>Total Amount: Rs. <span id="displayTotalCost">${totalCost}</span></h3>
-<input type="hidden" id="totalCost" value="${totalCost}">
+<div class="container">
+    <!-- Display Total Cost -->
+    <h3>Total Amount: Rs. <span id="displayTotalCost">${totalCost}</span></h3>
+    <input type="hidden" id="totalCost" value="${totalCost}">
 
-<!-- Discount Coupon Section -->
-<label for="couponName">Enter Discount Coupon ID:</label>
-<input type="text" id="couponName" name="couponName">
-<button type="button" onclick="applyDiscount()">Apply Discount</button>
-
-<h3 id="discountAmount" style="color: green;"></h3>
-<h3>Final Amount: <span id="finalAmount">Rs. ${totalCost}</span></h3>
-
-<!-- Payment Form -->
-<form action="/confirmOrder" method="post">
-    <input type="hidden" name="totalCost" value="${totalCost}">
-    <input type="hidden" name="finalAmount" id="finalAmountInput" value="${totalCost}">
-
-    <label>Select Payment Method:</label><br>
-    <input type="radio" name="paymentMethod" value="Credit Card" required> Credit Card<br>
-    <input type="radio" name="paymentMethod" value="Cash on Delivery" required> Cash on Delivery<br>
-    <input type="radio" name="paymentMethod" value="UPI" required> UPI<br>
-
-    <div id="upiSection" style="display:none;">
-        <label for="upiId">Enter UPI ID:</label>
-        <input type="text" id="upiId" name="upiId">
+    <!-- Discount Coupon Section -->
+    <div class="coupon-section">
+        <label for="couponName">Discount Coupon:</label>
+        <input type="text" id="couponName" name="couponName">
+        <button type="button" class="btn" onclick="applyDiscount()">Apply</button>
     </div>
 
-    <br>
-    <button type="submit">Confirm Order</button>
-</form>
+
+    <h3 id="discountAmount" style="color: green;"></h3>
+    <h3>Final Amount: <span id="finalAmount">Rs. ${totalCost}</span></h3>
+
+    <!-- Payment Form -->
+    <form action="/confirmOrder" method="post">
+        <input type="hidden" name="totalCost" value="${totalCost}">
+        <input type="hidden" name="finalAmount" id="finalAmountInput" value="${totalCost}">
+
+        <div class="payment-method">
+            <label>Select Payment Method:</label><br>
+            <input type="radio" name="paymentMethod" value="Credit Card" required> Credit Card<br>
+            <input type="radio" name="paymentMethod" value="Cash on Delivery" required> Cash on Delivery<br>
+            <input type="radio" name="paymentMethod" value="UPI" required> UPI<br>
+
+
+        <div id="upiSection" style="display:none;">
+            <label for="upiId">Enter UPI ID:</label>
+            <input type="text" id="upiId" name="upiId">
+        </div>
+        </div>
+
+        <br>
+        <button type="submit" class="btn">Confirm Order</button>
+    </form>
+</div>
 
 <script>
     document.querySelectorAll('input[name="paymentMethod"]').forEach((elem) => {
@@ -80,7 +91,5 @@
     });
 </script>
 
-<br>
-<a href="/orders"><button> Back to Orders </button></a>
 </body>
 </html>
