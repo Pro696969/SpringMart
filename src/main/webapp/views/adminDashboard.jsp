@@ -5,6 +5,8 @@
 <html>
 <head>
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/adminDashboard.css">
+
 </head>
 <body>
 <h1>Admin Dashboard</h1>
