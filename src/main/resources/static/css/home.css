@@ -9,31 +9,43 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
+    padding: 15px 30px; /* Slightly reduced padding for header to give more room */
     position: fixed;
     top: 0;
     width: 100%;
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     z-index: 10;
+    box-sizing: border-box; /* Ensures padding is included in the width */
 }
 
 h1 {
     color: #333;
     font-size: 36px;
     margin: 0;
+    white-space: nowrap; /* Prevent h1 from wrapping, good for fixed headers */
+}
+
+header h2 {
+    color: #555;
+    font-size: 18px;
+    margin: 0;
+    white-space: nowrap; /* Prevent username from wrapping */
 }
 
 button {
     background-color: #007bff;
     color: white;
-    padding: 12px 24px;
-    margin: 10px;
+    padding: 8px 15px; /* Slightly reduced padding for all buttons */
+    margin: 0; /* Important: remove default margins from general button rule */
     border: none;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    white-space: nowrap; /* Ensure button text doesn't wrap */
+    flex-shrink: 0; /* Prevent buttons from shrinking */
+    box-sizing: border-box; /* Include padding/border in button's total width/height */
 }
 
 button:hover {
@@ -42,19 +54,164 @@ button:hover {
 
 .action-buttons {
     display: flex;
-    gap: 30px;
-    margin-right: 20px;
-
+    align-items: center;
+    gap: 10px; /* Reduced gap between elements in action-buttons */
+    margin-right: 0; /* Removed margin-right as header padding now controls space */
+    flex-shrink: 0; /* Prevent the entire action-buttons container from shrinking too much */
 }
 
+/* Style for the "Proceed to Cart" link (the 'a' tag) */
+.action-buttons a {
+    text-decoration: none; /* **CRITICAL: REMOVE UNDERLINE** */
+    color: inherit; /* Inherit color from parent or just let button style dictate */
+    display: flex; /* Make the link a flex container to center its button */
+    align-items: center; /* Vertically center the button inside the link */
+    /* No margin here, let gap handle spacing */
+    height: auto; /* Allow height to adjust to button */
+}
+
+/* Style for the Logout form */
+.action-buttons form {
+    margin: 0; /* Remove any default form margins */
+    padding: 0; /* Remove any default form paddings */
+    display: flex; /* Make form a flex container to align its button */
+    align-items: center; /* Vertically center the button inside the form */
+    height: auto; /* Allow height to adjust to button */
+}
+
+/* Ensure buttons within these containers are properly styled */
+.action-buttons a button,
+.action-buttons form button {
+    margin: 0; /* Override any global button margin */
+    /* Padding and font-size are already set by the general button rule now */
+}
+
+
 form.search-form {
-    margin-top: 120px; /* to prevent it from being hidden behind fixed header */
+    margin-top: 120px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 #searchBox {
-    width: 200px;
-    padding: 10px;
+    width: 250px;
+    padding: 12px;
     font-size: 18px;
     border-radius: 6px;
     border: 1px solid #ccc;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+form.search-form button {
+    padding: 12px 25px;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+/* Sort controls (targetting your specific div) */
+div:has(select#sortBy, select#sortOrder) {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 0 auto 30px auto;
+    width: 80%;
+    max-width: 900px;
+    padding-left: 5px;
+    color: #555;
+    font-size: 16px;
+}
+
+div:has(select#sortBy, select#sortOrder) label {
+    font-weight: bold;
+}
+
+#sortBy, #sortOrder {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-24.8%200L146.2%20188.6%2030.3%2069.4a17.6%2017.6%200%200%200-24.8%2024.8l130.4%20130.4a17.6%2017.6%200%200%200%2024.8%200l130.4-130.4a17.6%2017.6%200%200%200%200-24.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 12px auto;
+    padding-right: 30px;
+    cursor: pointer;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#sortBy:focus, #sortOrder:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    outline: none;
+}
+
+
+/* --- Table Styles --- */
+table {
+    width: 80%;
+    max-width: 900px;
+    margin: 40px auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    border-right: 1px solid #eee;
+}
+
+th:last-child,
+td:last-child {
+    border-right: none;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: 1px solid #0056b3;
+}
+
+th:first-child {
+    border-top-left-radius: 8px;
+}
+th:last-child {
+    border-top-right-radius: 8px;
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 8px;
+}
+tr:last-child td:last-child {
+    border-bottom-right-radius: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tr:hover {
+    background-color: #e9ecef;
+}
+
+td:last-child button {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 8px 15px;
+    font-size: 14px;
 }

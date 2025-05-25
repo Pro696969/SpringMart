@@ -59,7 +59,7 @@ public class OrdersController {
                 return "redirect:/orders";
             }
 
-            // 🔥 Use the factory to create the order
+            // Use the factory to create the order
             Orders newOrder = orderFactory.createOrder(userId, cartItems, paymentMethod);
             ordersRepository.save(newOrder);
 
