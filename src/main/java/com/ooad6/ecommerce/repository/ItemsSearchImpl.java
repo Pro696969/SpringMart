@@ -48,7 +48,7 @@ public class ItemsSearchImpl implements ItemsSearch{
             itemsList.add(converter.read(Items.class, doc));
         }
 
-        System.out.println("📢 Total results: " + itemsList.size()); // ✅ Debugging
+        System.out.println("Total results: " + itemsList.size());
 
         return itemsList;
     }

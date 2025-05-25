@@ -3,9 +3,11 @@ package com.ooad6.ecommerce.controller;
 import com.ooad6.ecommerce.factory.OrderFactory;
 import com.ooad6.ecommerce.model.Cart;
 import com.ooad6.ecommerce.model.Orders;
+import com.ooad6.ecommerce.model.User;
 import com.ooad6.ecommerce.observer.OrderObserver;
 import com.ooad6.ecommerce.repository.CartRepository;
 import com.ooad6.ecommerce.repository.OrdersRepository;
+import com.ooad6.ecommerce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class OrdersController {
@@ -30,6 +33,8 @@ public class OrdersController {
 
     @Autowired
     private List<OrderObserver> observers;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/orders")
     public String showOrders(Model model, HttpSession session) {
@@ -47,8 +52,11 @@ public class OrdersController {
     }
 
     @PostMapping("/confirmOrder")
-    public String confirmOrder(@RequestParam("paymentMethod") String paymentMethod, HttpSession session) {
+    public String confirmOrder(@RequestParam("paymentMethod") String paymentMethod, HttpSession session, Model model) {
         Object userIdObj = session.getAttribute("userid");
+
+        Optional<User> user = userRepository.findByuserId((Integer) userIdObj);
+        model.addAttribute("username", user.get().getName());
 
         if (userIdObj instanceof Integer) {
             int userId = (Integer) userIdObj;

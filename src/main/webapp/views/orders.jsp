@@ -39,8 +39,8 @@
 
     <h3>Total Cost: Rs. <span id="totalCost">${totalCost}</span></h3>
 </c:if>
-    <a href="views/payment.jsp"><button class="nav-btn">Proceed to Payment</button></a>
-    <a href="views/cart.jsp"><button class="nav-btn">Back to Cart</button></a>
+    <button class="nav-btn" onclick="location.href='http://localhost:8686/views/payment.jsp'">Proceed to Payment</button>
+    <button class="nav-btn" onclick="location.href='http://localhost:8686/views/cart.jsp'">Back to Cart</button>
 <br>
 </body>
 </html>
