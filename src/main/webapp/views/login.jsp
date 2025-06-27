@@ -28,7 +28,7 @@
 </form>
 
 <p>Don't have an account?</p>
-<button onclick="location.href='http://localhost:8686/signup'">Sign up here</button>
+<button onclick="location.href='/signup'">Sign up here</button>
 
 </body>
 </html>

@@ -9,6 +9,6 @@
 </head>
 <body>
 <h2> Thank You For Shopping With Us, ${username}!!!</h2>
-<h3 class="homepage-btn"><button onclick="location.href='http://localhost:8686/homepage'">Back to SpringMart</button></h3>
+<h3 class="homepage-btn"><button onclick="location.href='/homepage'">Back to SpringMart</button></h3>
 </body>
 </html>

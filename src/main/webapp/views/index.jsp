@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>Welcome</h1>
-<button onclick="location.href='http://localhost:8686/signup'">Signup Here</button>
-<button onclick="location.href='http://localhost:8686/login'">Login Here</button>
+<button onclick="location.href='/signup'">Signup Here</button>
+<button onclick="location.href='/login'">Login Here</button>
 </body>
 </html>
