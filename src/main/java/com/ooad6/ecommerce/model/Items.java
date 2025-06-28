@@ -52,9 +52,7 @@ public class Items {
         Cost = cost;
     }
 
-    public int getStock() {
-        return Stock;
-    }
+    public int getStock() { return Stock; }
 
     public void setStock(int stock) {
         Stock = stock;

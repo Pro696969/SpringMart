@@ -49,36 +49,37 @@ public class CartController {
             Items item = itemOpt.get();
 
             int newQty = cartItem.getQty() + change;
-            int newStock = item.getStock() - change; // Adjust stock accordingly
 
-            if (newQty < 1 || newStock < 0) return getTotalCartCost();  // Prevent negative values
+            if (newQty < 1) return getTotalCartCost();  // Prevent negative values
+
+            if (newQty > item.getStock()) {
+                System.out.println("Cannot increase quantity. Available stock: " + item.getStock() +
+                        ", Requested quantity: " + newQty);
+                return getTotalCartCost(); // Prevent exceeding available stock
+            }
 
             cartItem.setQty(newQty);
             cartRepository.save(cartItem);
-
-            item.setStock(newStock);
-            itemRepository.save(item); // Update stock in MongoDB
         }
 
         return getTotalCartCost();
     }
 
     @PostMapping("/clearCart")
-    public String clearCart() {
-        List<Cart> cartList = cartRepository.findAll();
+    public String clearCart(HttpSession session) {
+        Object userIdObj = session.getAttribute("userid");
+        int userId = (Integer) userIdObj;
 
-        // Restore stock for each item before clearing cart
-        for (Cart cartItem : cartList) {
-            Optional<Items> itemOpt = itemRepository.findById(cartItem.getId());
-            if (itemOpt.isPresent()) {
-                Items item = itemOpt.get();
-                item.setStock(item.getStock() + cartItem.getQty()); // Restore stock
-                itemRepository.save(item);
-            }
-        }
+        // Only clear cart items for the current user
+        List<Cart> userCartItems = cartRepository.findByUserid(userId);
 
+        // This logic is further handled in Orders Controller as we decrease the item stock when payment is done.
+
+        // Since we're not reserving stock in cart, no need to restore stock
+        // Just clear the user's cart
+        cartRepository.deleteAll(userCartItems);
         // Clear the cart
-        cartRepository.deleteAll();
+        cartRepository.deleteAll(userCartItems);
 
         return "redirect:/cart";
     }
