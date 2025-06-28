@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@CrossOrigin(origins = "http://localhost:8686")
+@CrossOrigin(origins = {"http://localhost:8686", "https://springmart.onrender.com"})
 public class HomeController {
     @Autowired
     private ItemsShow itemRepository;
